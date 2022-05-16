@@ -21,16 +21,16 @@ const Planet = () => {
 				/>
 				<Card.Body>
 					<Card.Title>{planet.name}</Card.Title>
-					<h5>{planet.description}</h5>
-					<h5>diameter: {planet.diameter}</h5>
-					<h5>rotation_period: {planet.rotation_period}</h5>
-					<h5>gravity: {planet.gravity}</h5>
+					<h5>Description: {planet.description}</h5>
+					<h5>Diameter: {planet.diameter}</h5>
+					<h5>Rotation period: {planet.rotation_period}</h5>
+					<h5>Gravity: {planet.gravity}</h5>
 					<Link
-						className="btn btn-primary"
-						to={`/planets/${planet.uid}`}>
-						Leer Mas
+						className="btn btn-outline-info mx-2"
+						to={`/planets`}>
+						Go back
 					</Link>
-					<Button variant="warning">Leer más</Button>
+				
 				</Card.Body>
 			</Card>
 		);

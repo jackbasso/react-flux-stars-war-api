@@ -10,7 +10,9 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
-import ListPlanets, { Planets } from "./views/starWars/planets";
+import ListPlanets, { Planet } from "./views/starWars/planets";
+import ListCharacters, { Character } from "./views/starWars/characters";
+import ListVehicles, { Vehicle } from "./views/starWars/vehicles";
 import Index from "./views/starWars/planets/index.js";
 
 //create your first component
@@ -38,7 +40,19 @@ const Layout = () => {
 							<ListPlanets />
 						</Route>
 						<Route exact path="/planets/:id">
-							<Planets />
+							<Planet />
+						</Route>
+						<Route exact path="/peoples">
+							<ListCharacters />
+						</Route>
+						<Route exact path="/people/:id">
+							<Character />
+						</Route>
+						<Route exact path="/vehicles">
+							<ListVehicles />
+						</Route>
+						<Route exact path="/vehicles/:id">
+							<Vehicle />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

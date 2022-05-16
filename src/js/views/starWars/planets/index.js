@@ -1,5 +1,5 @@
 import ListPlanets from "./List.jsx";
-import Planets from "./Planet.jsx";
+import Planet from "./Planet.jsx";
 
 export default ListPlanets;
-export { Planets };
+export { Planet };

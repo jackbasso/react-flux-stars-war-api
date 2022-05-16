@@ -9,25 +9,23 @@ import {
 	Button,
 } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { planets } from "../../../apiStarWars.js";
+import { vehicles } from "../../../apiStarWars.js";
 import { Link } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 
-const ListPlanets = () => {
+const ListVehicles = () => {
 	var [data, setData] = useState([]);
 	var [page, setPage] = useState(1);
 	var [pages, setPages] = useState(1);
 	const myStore = useContext(Context);
 
 	function irAPagina(id) {
-		planets.getQuery(id).then((data) => {
-			console.log("Cargando pagina ... ", id);
+		vehicles.getQuery(id).then((data) => {
 			// Se actualizan los valores del estado
 			setData(data.results);
 			setPage(id);
 			// Esta actualizacion tiene un hook
 			setPages(data.total_pages);
-			console.log("Cargada pagina ", id);
 		});
 	}
 
@@ -44,51 +42,47 @@ const ListPlanets = () => {
 	}
 
 	useEffect(() => {
-		console.log("Componente montado");
 		irAPagina(1);
 		return () => {
-			console.log("Componente desmontado");
 		};
 	}, []);
 
 	useEffect(() => {
-		console.log("Actualizando paginas");
 		// actualizarPaginacion();
 		return () => {
-			console.log("Finalizada la actualizacion de paginas");
 		};
 	}, [pages, pages]);
 
-	function agregarFavoritos(planet) {
+	function agregarFavoritos(vehicle) {
 		const favorito = {
-			id: `planet/${planet.uid}`,
-			name: planet.name,
+			id: `vehicle/${vehicle.uid}`,
+			name: vehicle.name,
 		};
 		myStore.actions.agregarFavorito(favorito);
 	}
 
 	function getItems() {
 		if (!data) return;
-		return data.map((planet) => {
+		return data.map((vehicle) => {
 			return (
-				<ListGroup.Item key={planet.uid}>
+				<ListGroup.Item key={vehicle.uid}>
 					<Card style={{ width: "18rem" }}>
 						<Card.Img
 							className="img-fluid"
 							variant="top"
 							height="50"
-							src={planet.img}
+							src={vehicle.img}
 						/>
 						<Card.Body>
-							<Card.Title>{planet.name}</Card.Title>
+							<Card.Title>{vehicle.name}</Card.Title>
 							<Link
 								className="btn btn-outline-info mx-2"
-								to={`/planets/${planet.uid}`}>
+								to={`/vehicles/${vehicle.uid}`}>
 								Read more
 							</Link>
 							<Button
 								variant="btn btn-outline-danger"
-								onClick={() => agregarFavoritos(planet)}>
+								onClick={() => agregarFavoritos(vehicle)}>
 								Star
 							</Button>
 						</Card.Body>
@@ -126,4 +120,4 @@ const ListPlanets = () => {
 		</div>
 	);
 };
-export default ListPlanets;
+export default ListVehicles;

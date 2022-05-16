@@ -9,18 +9,18 @@ import {
 	Button,
 } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { planets } from "../../../apiStarWars.js";
+import { people } from "../../../apiStarWars.js";
 import { Link } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 
-const ListPlanets = () => {
+const ListCharacters = () => {
 	var [data, setData] = useState([]);
 	var [page, setPage] = useState(1);
 	var [pages, setPages] = useState(1);
 	const myStore = useContext(Context);
 
 	function irAPagina(id) {
-		planets.getQuery(id).then((data) => {
+		people.getQuery(id).then((data) => {
 			console.log("Cargando pagina ... ", id);
 			// Se actualizan los valores del estado
 			setData(data.results);
@@ -59,36 +59,36 @@ const ListPlanets = () => {
 		};
 	}, [pages, pages]);
 
-	function agregarFavoritos(planet) {
+	function agregarFavoritos(people) {
 		const favorito = {
-			id: `planet/${planet.uid}`,
-			name: planet.name,
+			id: `people/${people.uid}`,
+			name: people.name,
 		};
 		myStore.actions.agregarFavorito(favorito);
 	}
 
 	function getItems() {
 		if (!data) return;
-		return data.map((planet) => {
+		return data.map((people) => {
 			return (
-				<ListGroup.Item key={planet.uid}>
+				<ListGroup.Item key={people.uid}>
 					<Card style={{ width: "18rem" }}>
 						<Card.Img
 							className="img-fluid"
 							variant="top"
 							height="50"
-							src={planet.img}
+							src={people.img}
 						/>
 						<Card.Body>
-							<Card.Title>{planet.name}</Card.Title>
+							<Card.Title>{people.name}</Card.Title>
 							<Link
 								className="btn btn-outline-info mx-2"
-								to={`/planets/${planet.uid}`}>
-								Read more
+								to={`/people/${people.uid}`}>
+								Leer Mas
 							</Link>
 							<Button
 								variant="btn btn-outline-danger"
-								onClick={() => agregarFavoritos(planet)}>
+								onClick={() => agregarFavoritos(people)}>
 								Star
 							</Button>
 						</Card.Body>
@@ -126,4 +126,4 @@ const ListPlanets = () => {
 		</div>
 	);
 };
-export default ListPlanets;
+export default ListCharacters;
