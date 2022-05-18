@@ -11,10 +11,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ stared: [...store.stared, newStared] });
 			},
-			eliminarFavoritos: (id) => {
+			eliminarFavorito: (name) => {
 				const store = getStore();
 				setStore({
-					stared: store.stared.filter((item) => item.id != id),
+					stared: store.stared.filter((item) => item.name !== name),
 				});
 			},
 		},
