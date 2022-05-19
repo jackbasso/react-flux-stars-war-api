@@ -8,11 +8,12 @@ export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
 	function cargarFavoritos() {
-		return store.stared.map((item) => <Dropdown.Item key={item.name} href="#/action-1">{item.name}</Dropdown.Item>);
+		return store.stared.map((item) => <Dropdown.Item key={item.name} eventKey={item.name}>{item.name}</Dropdown.Item>);
 	}
-	function descargarFavoritos(name) {
-		actions.eliminarFavorito(name)
-		return store.stared.map((item) => <Dropdown.Item key={item.name} href="#/action-1">{item.name}</Dropdown.Item>);
+	const descargarFavoritos= (e) => {
+		console.log(e)
+		actions.eliminarFavorito(e)
+		return store.stared.map((item) => <Dropdown.Item key={item.name} eventKey={item.name}>{item.name}</Dropdown.Item>);
 	}
 
 return (
@@ -30,8 +31,10 @@ return (
 			<Link to="/vehicles">
 				<button className="btn btn-outline-secondary mx-2">Vehicles</button>
 			</Link>
-			<DropdownButton className="btn btn-outline-secondary mx-2" variant="danger" id="dropdown-basic-button" title="Your favorites">
-			<span onClick={()=> descargarFavoritos('R2-D2')}>{cargarFavoritos()}</span>
+			<DropdownButton className="btn btn-outline-secondary mx-2" onSelect={descargarFavoritos}  variant="danger" id="dropdown-basic-button" title="Your favorites">
+			{cargarFavoritos()}
+			<Dropdown.Divider />
+        <Dropdown.Item>Click to delete!</Dropdown.Item>
 			</DropdownButton>
 
 		</div>
